@@ -39,8 +39,25 @@ theorem problem3 {x : ℤ} (hx : x ≥ 9) : x ^ 3 - 8 * x ^ 2 + 2 * x ≥ 3 := b
 
 @[autograded 5]
 theorem problem4 {x : ℚ} : x ^ 2 - 2 * x ≥ -1 := by
-  sorry
+  calc
+    x^2 - 2*x = x^2-2*x+1-1 := by ring
+    _ = (x-1)^2-1 := by ring
+    _ ≥ -1 := by extra
 
 @[autograded 5]
 theorem problem5 (a b : ℝ) (h1 : -b ≤ a) (h2 : a ≤ b) : a ^ 2 ≤ b ^ 2 := by
-  sorry
+  have hp : 0 ≤ a+b := by
+    calc
+      0 = (-b) + b := by ring
+      _ ≤ a + b := by rel [h1]
+  have hm : a-b ≤ 0 := by
+    calc
+      a-b ≤  a - a := by rel [h2]
+      _ = 0 := by ring
+  have h : (a+b)*(a-b) ≤ 0 := by
+    sorry
+  calc
+    a^2 = a^2 - b^2 + b^2 := by ring
+    _ = (a+b)*(a-b) + b^2 := by ring
+    _ ≤ 0 + b^2 := by rel [h]
+    _ = b^2 := by ring
