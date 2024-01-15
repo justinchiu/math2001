@@ -55,7 +55,15 @@ theorem problem5 (a b : ℝ) (h1 : -b ≤ a) (h2 : a ≤ b) : a ^ 2 ≤ b ^ 2 :=
       a-b ≤  a - a := by rel [h2]
       _ = 0 := by ring
   have h : (a+b)*(a-b) ≤ 0 := by
-    sorry
+    rw [← neg_nonneg]
+    rw [neg_mul_eq_mul_neg]
+    rw [mul_nonneg_iff]
+    rw [neg_nonneg]
+    rw [neg_nonpos]
+    left
+    constructor
+    exact hp
+    exact hm
   calc
     a^2 = a^2 - b^2 + b^2 := by ring
     _ = (a+b)*(a-b) + b^2 := by ring
