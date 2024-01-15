@@ -55,11 +55,7 @@ theorem problem5 (a b : ℝ) (h1 : -b ≤ a) (h2 : a ≤ b) : a ^ 2 ≤ b ^ 2 :=
       a-b ≤  a - a := by rel [h2]
       _ = 0 := by ring
   have h : (a+b)*(a-b) ≤ 0 := by
-    rw [← neg_nonneg]
-    rw [neg_mul_eq_mul_neg]
-    rw [mul_nonneg_iff]
-    rw [neg_nonneg]
-    rw [neg_nonpos]
+    rw [mul_nonpos_iff]
     left
     constructor
     exact hp
