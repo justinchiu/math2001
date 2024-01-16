@@ -14,7 +14,12 @@ for clearer statements and any special instructions. -/
 
 @[autograded 4]
 theorem problem1 {x : ℚ} (h1 : x ^ 2 = 4) (h2 : 1 < x) : x = 2 := by
-  sorry
+  have h : x * (x+2) = 2 * (x+2) := by
+    calc
+      x * (x+2) = x^2 + 2*x := by ring
+      _ = 4 + 2*x := by rw [h1]
+      _ = 2 * (x+2) := by ring
+  cancel x+2 at h
 
 @[autograded 5]
 theorem problem2 {s : ℚ} (h1 : 3 * s ≤ -6) (h2 : 2 * s ≥ -4) : s = -2 := by
