@@ -36,7 +36,11 @@ theorem problem2 {s : ℚ} (h1 : 3 * s ≤ -6) (h2 : 2 * s ≥ -4) : s = -2 := b
 
 @[autograded 2]
 theorem problem3 {a b : ℝ} (h : a = 2 - b) : a + b = 2 ∨ a + b = 8 := by
-  sorry
+  left
+  calc
+    a + b = 2 - b + b := by rw [h]
+    _ = 2 := by ring
+
 
 @[autograded 4]
 theorem problem4 {t : ℚ} (h : t = -2 ∨ t = 3) : t ^ 2 - t - 6 = 0 := by
