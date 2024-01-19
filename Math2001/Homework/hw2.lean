@@ -23,7 +23,16 @@ theorem problem1 {x : ℚ} (h1 : x ^ 2 = 4) (h2 : 1 < x) : x = 2 := by
 
 @[autograded 5]
 theorem problem2 {s : ℚ} (h1 : 3 * s ≤ -6) (h2 : 2 * s ≥ -4) : s = -2 := by
-  sorry
+  have hl : s ≤ -2 := by calc
+    s = 3 * s / 3 := by ring
+    _ ≤ -6 / 3 := by rel [h1]
+    _ = -2 := by ring
+  have hu : s ≥ -2 := by calc
+    s = 2 * s / 2 := by ring
+    _ ≥ -4 / 2 := by rel [h2]
+    _ = -2 := by ring
+  apply le_antisymm hl hu
+
 
 @[autograded 2]
 theorem problem3 {a b : ℝ} (h : a = 2 - b) : a + b = 2 ∨ a + b = 8 := by
