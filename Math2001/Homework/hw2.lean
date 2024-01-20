@@ -36,7 +36,8 @@ theorem problem2 {s : ℚ} (h1 : 3 * s ≤ -6) (h2 : 2 * s ≥ -4) : s = -2 := b
 
 @[autograded 2]
 theorem problem3 {a b : ℝ} (h : a = 2 - b) : a + b = 2 ∨ a + b = 8 := by
-  left
+  left  -- Odd
+  . sorry
   calc
     a + b = 2 - b + b := by rw [h]
     _ = 2 := by ring
@@ -44,11 +45,23 @@ theorem problem3 {a b : ℝ} (h : a = 2 - b) : a + b = 2 ∨ a + b = 8 := by
 
 @[autograded 4]
 theorem problem4 {t : ℚ} (h : t = -2 ∨ t = 3) : t ^ 2 - t - 6 = 0 := by
-  sorry
+  obtain h1 | h2 := h
+  calc
+    t^2 - t - 6 = (-2)^2 + 2 - 6 := by rw [h1]
+    _ = 0 := by ring
+  calc
+    t^2 - t - 6 = (3)^2 - 3 - 6 := by rw [h2]
+    _ = 0 := by ring
 
 @[autograded 5]
 theorem problem5 {x : ℤ} : 2 * x ≠ 7 := by
-  sorry
+  intros h
+  obtain he | ho := Int.even_or_odd x
+  -- Even
+  · dsimp [Int.Even] at he
+    sorry
+  -- Odd
+  . sorry
 
 @[autograded 5]
 theorem problem6 {t : ℝ} (ht : t ^ 3 = t ^ 2) : t = 1 ∨ t = 0 := by
