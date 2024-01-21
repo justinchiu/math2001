@@ -61,8 +61,11 @@ theorem problem4 (n : ℤ) : Odd (5 * n ^ 2 + 3 * n + 7) := by
 
 @[autograded 2]
 theorem problem5 : (3 : ℤ) ∣ -9 := by
-  sorry
+  use -3
+  numbers
 
 @[autograded 3]
 theorem problem6 : ¬(3 : ℤ) ∣ -10 := by
-  sorry
+  apply Int.not_dvd_of_exists_lt_and_lt
+  use -4
+  constructor <;> numbers
