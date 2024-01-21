@@ -16,11 +16,26 @@ for clearer statements and any special instructions. -/
 
 @[autograded 4]
 theorem problem1 : ∃ x : ℝ, x < 0 ∧ x ^ 2 < 1 := by
-  sorry
+  use -0.5
+  constructor <;> numbers
 
 @[autograded 5]
 theorem problem2 (x : ℚ) : ∃ y : ℚ, y ^ 2 > x := by
-  sorry
+  use x+1
+  have h := le_or_gt x 0
+  obtain hx | hx := h
+  -- x ≤ 0
+  · have hp : (x+1)^2 > 0 := by sorry
+    calc
+      (x+1)^2 > 0 := by rel [hp]
+      _ ≥ x := by rel [hx]
+  -- x > 0
+  · have h := le_or_gt x 1
+    obtain hxx | hxx := h
+    -- x ≤ 1
+    · sorry
+    -- x > 1
+    · sorry
 
 @[autograded 5]
 theorem problem3 {x : ℤ} (hx : Odd x) : Odd (x ^ 3) := by
