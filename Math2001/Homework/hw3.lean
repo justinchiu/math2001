@@ -30,12 +30,9 @@ theorem problem2 (x : ℚ) : ∃ y : ℚ, y ^ 2 > x := by
       (x+1)^2 > 0 := by rel [hp]
       _ ≥ x := by rel [hx]
   -- x > 0
-  · have h := le_or_gt x 1
-    obtain hxx | hxx := h
-    -- x ≤ 1
-    · sorry
-    -- x > 1
-    · sorry
+  · calc
+      (x+1)^2 = x^2 + x + 1 + x := by ring
+      _ > x := by extra
 
 @[autograded 5]
 theorem problem3 {x : ℤ} (hx : Odd x) : Odd (x ^ 3) := by
