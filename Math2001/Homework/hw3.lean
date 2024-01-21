@@ -22,14 +22,13 @@ theorem problem1 : ∃ x : ℝ, x < 0 ∧ x ^ 2 < 1 := by
 @[autograded 5]
 theorem problem2 (x : ℚ) : ∃ y : ℚ, y ^ 2 > x := by
   use x+1
-  have h := le_or_gt x 0
+  have h := lt_or_ge x 0
   obtain hx | hx := h
-  -- x ≤ 0
-  · have hp : (x+1)^2 > 0 := by sorry
-    calc
-      (x+1)^2 > 0 := by rel [hp]
-      _ ≥ x := by rel [hx]
-  -- x > 0
+  -- x < 0
+  · calc
+      x < 0 := by rel [hx]
+      _ ≤ (x+1)^2 := by extra
+  -- x ≥ 0
   · calc
       (x+1)^2 = x^2 + x + 1 + x := by ring
       _ > x := by extra
