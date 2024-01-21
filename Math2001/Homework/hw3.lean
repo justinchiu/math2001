@@ -35,7 +35,12 @@ theorem problem2 (x : ℚ) : ∃ y : ℚ, y ^ 2 > x := by
 
 @[autograded 5]
 theorem problem3 {x : ℤ} (hx : Odd x) : Odd (x ^ 3) := by
-  sorry
+  dsimp [Odd] at *
+  obtain ⟨y, hy⟩ := hx
+  use 4 * y^3 + 6 * y^2 + 3 * y
+  calc
+    x^3 = (2 * y + 1)^3 := by rw [hy]
+    _ = 2 * (4 * y^3 + 6 * y^2 + 3 * y) + 1 := by ring
 
 @[autograded 6]
 theorem problem4 (n : ℤ) : Odd (5 * n ^ 2 + 3 * n + 7) := by
