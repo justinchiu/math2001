@@ -55,14 +55,29 @@ theorem problem4 {t : ℚ} (h : t = -2 ∨ t = 3) : t ^ 2 - t - 6 = 0 := by
 
 @[autograded 5]
 theorem problem5 {x : ℤ} : 2 * x ≠ 7 := by
-  intros h
-  obtain he | ho := Int.even_or_odd x
-  -- Even
-  · dsimp [Int.Even] at he
-    sorry
-  -- Odd
-  . sorry
+  have h := le_or_succ_le x 3
+  obtain hx | hx := h
+  · apply ne_of_lt
+    calc
+      2 * x ≤ 2 * 3 := by rel [hx]
+      _ < 7 := by numbers
+  · apply ne_of_gt
+    calc
+      2 * x ≥ 2 * 4 := by rel [hx]
 
 @[autograded 5]
 theorem problem6 {t : ℝ} (ht : t ^ 3 = t ^ 2) : t = 1 ∨ t = 0 := by
-  sorry
+  have h := calc
+    t^2 * (t-1) = t^3 - t^2 := by ring
+    _ = t^3 - t^3 := by rw [ht]
+    _ = 0 := by ring
+  have h2 := eq_zero_or_eq_zero_of_mul_eq_zero h
+  obtain h0 | h1 := h2
+  · right
+    have h00 := calc
+      t * t = t^2 := by ring
+      _ = 0 := by rw [h0]
+    apply eq_zero_or_eq_zero_of_mul_eq_zero at h00
+    obtain H | H := h00 <;> exact H
+  · left
+    addarith [h1]
