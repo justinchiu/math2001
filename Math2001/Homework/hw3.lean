@@ -44,7 +44,20 @@ theorem problem3 {x : ℤ} (hx : Odd x) : Odd (x ^ 3) := by
 
 @[autograded 6]
 theorem problem4 (n : ℤ) : Odd (5 * n ^ 2 + 3 * n + 7) := by
-  sorry
+  dsimp [Odd] at *
+  obtain hn | hn := even_or_odd n
+  -- Even n
+  · obtain ⟨x,hx⟩ := hn
+    use 10 * x^2 + 3 * x + 3
+    calc
+      5*n^2 + 3*n + 7 = 5 * (2*x)^2 + 3*(2*x) + 7 := by rw [hx]
+      _ = 2 * (10 * x ^ 2 + 3 * x + 3) + 1 := by ring
+  -- Odd n
+  · obtain ⟨x,hx⟩ := hn
+    use 10 * x^2 + 13 * x + 7
+    calc
+      5*n^2 + 3*n + 7 = 5 * (2*x+1)^2 + 3*(2*x+1) + 7 := by rw [hx]
+      _ = 2 * (10 * x ^ 2 + 13 * x + 7) + 1 := by ring
 
 @[autograded 2]
 theorem problem5 : (3 : ℤ) ∣ -9 := by
