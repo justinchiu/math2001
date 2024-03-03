@@ -26,7 +26,8 @@ lemma IneqExtra.neg_le_sub_self_of_nonneg [LinearOrderedAddCommGroup G] {a b : G
   rw [sub_eq_add_neg]
   apply le_add_of_nonneg_left h
 
-attribute [aesop safe (rule_sets := [extra]) (apply (transparency := instances))]
+-- (apply (transparency := instances))
+attribute [aesop (rule_sets := [extra]) safe apply]
   le_add_of_nonneg_right le_add_of_nonneg_left
   lt_add_of_pos_right lt_add_of_pos_left
   IneqExtra.neg_le_sub_self_of_nonneg
@@ -37,4 +38,4 @@ attribute [aesop safe (rule_sets := [extra]) (apply (transparency := instances))
 def extra.Positivity : Lean.Elab.Tactic.TacticM Unit :=
 Lean.Elab.Tactic.liftMetaTactic fun g => do Mathlib.Meta.Positivity.positivity g; pure []
 
-attribute [aesop safe (rule_sets [extra]) tactic] extra.Positivity
+attribute [aesop safe (rule_sets := [extra]) tactic] extra.Positivity
